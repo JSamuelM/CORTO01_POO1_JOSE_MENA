@@ -5,8 +5,11 @@
 package com.sv.udb.forms;
 
 import com.sv.udb.clases.Controlador;
+import com.sv.udb.clases.ControladorEquipo;
+import com.sv.udb.clases.Equipos;
 import com.sv.udb.clases.Jugadores;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -16,6 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Corto extends javax.swing.JFrame {
     Controlador obj;
+    ControladorEquipo objEqui;
 
     /**
      * Creates new form Corto
@@ -23,6 +27,7 @@ public class Corto extends javax.swing.JFrame {
     public Corto() {
         initComponents();
         obj = new Controlador();
+        objEqui = new ControladorEquipo();
     }
     
     private void llenarLista()
@@ -32,6 +37,37 @@ public class Corto extends javax.swing.JFrame {
             model.addElement(jugador);
         }
         this.lstJugadores.setModel((DefaultListModel)model);
+    }
+    
+    private void cargarComboEquipos()
+    {
+        //Cargar primer combo de partidos
+        DefaultComboBoxModel<Equipos> modeEqui = new DefaultComboBoxModel<>();
+        for (Equipos temp : objEqui.consTodo()) {
+            modeEqui.addElement(temp);
+        }
+        this.cmbEquipo1.setModel((DefaultComboBoxModel)modeEqui);
+        //Cargar segundo combo de partidos
+        modeEqui = new DefaultComboBoxModel<>();
+        for (Equipos temp : objEqui.consTodo()) {
+            modeEqui.addElement(temp);
+        }
+        this.cmbEquipo2.setModel((DefaultComboBoxModel)modeEqui);
+        //Cargar combo de Jugadores
+        modeEqui = new DefaultComboBoxModel<>();
+        for (Equipos temp : objEqui.consTodo()) {
+            modeEqui.addElement(temp);
+        }
+        this.cmbEquipos.setModel((DefaultComboBoxModel)modeEqui);
+    }
+    
+    private void cargarComboJugadores()
+    {
+        DefaultComboBoxModel<Jugadores> modeJuga = new DefaultComboBoxModel<>();
+        for (Jugadores temp : obj.listaJugadores()) {
+            modeJuga.addElement(temp);
+        }
+        this.cmbJugadores.setModel((DefaultComboBoxModel)modeJuga);
     }
 
     /**
@@ -43,6 +79,19 @@ public class Corto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Patidos = new javax.swing.JPanel();
+        cmbEquipo1 = new javax.swing.JComboBox<>();
+        cmbEquipo2 = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listEquipo1 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listEquipo2 = new javax.swing.JList<>();
+        btnPartido = new javax.swing.JButton();
+        pnlAgregarEquipos = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        txtNombreEquipo = new javax.swing.JTextField();
+        btnAgregarEquipo = new javax.swing.JButton();
+        pnlJugadores = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -50,48 +99,99 @@ public class Corto extends javax.swing.JFrame {
         txtEdad = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtEstatura = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtPeso = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
+        pnlAsignarJugadores = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        cmbEquipos = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
+        cmbJugadores = new javax.swing.JComboBox<>();
+        btnAsignar = new javax.swing.JButton();
+        pnlListaJugadores = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstJugadores = new javax.swing.JList<>();
         btnJugadorAlto = new javax.swing.JButton();
         btnMenorEdad = new javax.swing.JButton();
         btnPesaMas = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        cmbEquipo1 = new javax.swing.JComboBox<>();
-        cmbEquipo2 = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listEquipo1 = new javax.swing.JList<>();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        listEquipo2 = new javax.swing.JList<>();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        txtNombreEquipo = new javax.swing.JTextField();
-        btnAgregarEquipo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        Patidos.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipos"));
+
+        jScrollPane2.setViewportView(listEquipo1);
+
+        jScrollPane3.setViewportView(listEquipo2);
+
+        btnPartido.setText("Patido");
+        btnPartido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPartidoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PatidosLayout = new javax.swing.GroupLayout(Patidos);
+        Patidos.setLayout(PatidosLayout);
+        PatidosLayout.setHorizontalGroup(
+            PatidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatidosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PatidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cmbEquipo1, 0, 130, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(PatidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(cmbEquipo2, 0, 124, Short.MAX_VALUE))
+                .addGap(122, 122, 122))
+            .addGroup(PatidosLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(btnPartido)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        PatidosLayout.setVerticalGroup(
+            PatidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatidosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PatidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbEquipo1)
+                    .addComponent(cmbEquipo2))
+                .addGap(18, 18, 18)
+                .addComponent(btnPartido)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(PatidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        pnlAgregarEquipos.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Equipo"));
+        pnlAgregarEquipos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setText("Nombre de equipo:");
+        pnlAgregarEquipos.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 36, -1, -1));
+        pnlAgregarEquipos.add(txtNombreEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 33, 150, -1));
+
+        btnAgregarEquipo.setText("Agregar");
+        btnAgregarEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarEquipoActionPerformed(evt);
+            }
+        });
+        pnlAgregarEquipos.add(btnAgregarEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, -1, -1));
+
+        pnlJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Jugadores"));
 
         jLabel1.setText("Ingrese los datos para un jugador:");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
         jLabel2.setText("Nombre:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
-        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 104, -1));
 
         jLabel3.setText("Edad:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, -1, -1));
-        getContentPane().add(txtEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 104, -1));
 
         jLabel4.setText("Estatura:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, -1));
-        getContentPane().add(txtEstatura, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 270, 104, -1));
 
         jLabel5.setText("Peso:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, -1, -1));
-        getContentPane().add(txtPeso, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 104, -1));
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,30 +199,125 @@ public class Corto extends javax.swing.JFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, -1, -1));
+
+        javax.swing.GroupLayout pnlJugadoresLayout = new javax.swing.GroupLayout(pnlJugadores);
+        pnlJugadores.setLayout(pnlJugadoresLayout);
+        pnlJugadoresLayout.setHorizontalGroup(
+            pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlJugadoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlJugadoresLayout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlJugadoresLayout.createSequentialGroup()
+                            .addGroup(pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnAgregar)
+                                .addGroup(pnlJugadoresLayout.createSequentialGroup()
+                                    .addGap(8, 8, 8)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5)))
+                            .addGap(18, 18, 18)
+                            .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlJugadoresLayout.setVerticalGroup(
+            pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlJugadoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtEstatura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(pnlJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addContainerGap())
+        );
+
+        pnlAsignarJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Asignar Jugador a Equipo"));
+
+        jLabel8.setText("Equipo:");
+
+        jLabel9.setText("Jugador:");
+
+        btnAsignar.setText("Asignar");
+        btnAsignar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAsignarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAsignarJugadoresLayout = new javax.swing.GroupLayout(pnlAsignarJugadores);
+        pnlAsignarJugadores.setLayout(pnlAsignarJugadoresLayout);
+        pnlAsignarJugadoresLayout.setHorizontalGroup(
+            pnlAsignarJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAsignarJugadoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbJugadores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(pnlAsignarJugadoresLayout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(btnAsignar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlAsignarJugadoresLayout.setVerticalGroup(
+            pnlAsignarJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAsignarJugadoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlAsignarJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cmbEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(cmbJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnAsignar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlListaJugadores.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Jugadores"));
 
         jLabel6.setText("Lista de jugadores:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, -1, -1));
 
         jScrollPane1.setViewportView(lstJugadores);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 149, 146));
-
-        btnJugadorAlto.setText("El jugador más alto");
+        btnJugadorAlto.setText("Más alto");
         btnJugadorAlto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJugadorAltoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnJugadorAlto, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
 
-        btnMenorEdad.setText("El jugador menor edad");
+        btnMenorEdad.setText("Menor edad");
         btnMenorEdad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenorEdadActionPerformed(evt);
             }
         });
-        getContentPane().add(btnMenorEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, -1));
 
         btnPesaMas.setText("El jugador que más pesa");
         btnPesaMas.addActionListener(new java.awt.event.ActionListener() {
@@ -130,56 +325,80 @@ public class Corto extends javax.swing.JFrame {
                 btnPesaMasActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPesaMas, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Equipos"));
-
-        jScrollPane2.setViewportView(listEquipo1);
-
-        jScrollPane3.setViewportView(listEquipo2);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlListaJugadoresLayout = new javax.swing.GroupLayout(pnlListaJugadores);
+        pnlListaJugadores.setLayout(pnlListaJugadoresLayout);
+        pnlListaJugadoresLayout.setHorizontalGroup(
+            pnlListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlListaJugadoresLayout.createSequentialGroup()
+                .addGroup(pnlListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlListaJugadoresLayout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addComponent(jLabel6))
+                    .addGroup(pnlListaJugadoresLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(pnlListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pnlListaJugadoresLayout.createSequentialGroup()
+                                .addComponent(btnJugadorAlto)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMenorEdad)))))
+                .addContainerGap(30, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListaJugadoresLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnPesaMas)
+                .addGap(44, 44, 44))
+        );
+        pnlListaJugadoresLayout.setVerticalGroup(
+            pnlListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlListaJugadoresLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cmbEquipo1, 0, 130, Short.MAX_VALUE))
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(cmbEquipo2, 0, 124, Short.MAX_VALUE))
-                .addGap(122, 122, 122))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbEquipo1)
-                    .addComponent(cmbEquipo2))
+                .addGroup(pnlListaJugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnJugadorAlto)
+                    .addComponent(btnMenorEdad))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnPesaMas)
+                .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 300, -1));
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Agregar Equipo"));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel7.setText("Nombre de equipo:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 36, -1, -1));
-        jPanel2.add(txtNombreEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(135, 33, 150, -1));
-
-        btnAgregarEquipo.setText("Agregar");
-        jPanel2.add(btnAgregarEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(214, 71, -1, -1));
-
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 11, 340, 120));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlAgregarEquipos, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                    .addComponent(pnlAsignarJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlListaJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(Patidos, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlListaJugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Patidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pnlJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pnlAgregarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(pnlAsignarJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -202,6 +421,7 @@ public class Corto extends javax.swing.JFrame {
             txtEdad.setText("");
             txtEstatura.setText("");
             txtPeso.setText("");
+            this.cargarComboJugadores();
         }
         catch(Exception e)
         {
@@ -220,6 +440,69 @@ public class Corto extends javax.swing.JFrame {
     private void btnPesaMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesaMasActionPerformed
         obj.jugadorMasPeso();
     }//GEN-LAST:event_btnPesaMasActionPerformed
+
+    private void btnAgregarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarEquipoActionPerformed
+        try
+        {
+            if(this.objEqui.addEqui(this.txtNombreEquipo.getText()))
+            {
+                JOptionPane.showMessageDialog(this, "Datos guardados", "POO1", JOptionPane.INFORMATION_MESSAGE);
+                this.txtNombreEquipo.setText("");
+                this.cargarComboEquipos();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Error en sus datos, favor verifique", "POO1", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error al procesar", "POO1", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgregarEquipoActionPerformed
+
+    private void btnAsignarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAsignarActionPerformed
+        try
+        {
+            Equipos objeEqui = (Equipos)this.cmbEquipos.getSelectedItem();
+            Jugadores objeJuga = (Jugadores)this.cmbJugadores.getSelectedItem();
+            if(this.objEqui.agreJugaAList(objeEqui, objeJuga))
+            {
+                JOptionPane.showMessageDialog(this, "El jugador ha sido asignado", "POO1", JOptionPane.INFORMATION_MESSAGE);
+                cmbJugadores.removeItem(objeJuga);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Error en sus datos, favor verifique", "POO1", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error al procesar", "POO1", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAsignarActionPerformed
+
+    private void btnPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPartidoActionPerformed
+        Equipos tempEquiA = (Equipos)this.cmbEquipo1.getSelectedItem();
+        Equipos tempEquiB = (Equipos)this.cmbEquipo2.getSelectedItem();
+        if (cmbEquipo1.getSelectedItem() == cmbEquipo2.getSelectedItem()) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar equipos diferentes \nO agregue nuevos equipos", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } else{
+            DefaultListModel<Jugadores> modeJugaA = new DefaultListModel<>();
+            DefaultListModel<Jugadores> modeJugaB = new DefaultListModel<>();
+            for(Jugadores temp : tempEquiA.getListJugadores())
+            {
+                modeJugaA.addElement(temp);
+            }
+
+            for(Jugadores temp : tempEquiB.getListJugadores())
+            {
+                modeJugaB.addElement(temp);
+            }
+            this.listEquipo1.setModel((DefaultListModel)modeJugaA);
+            this.listEquipo2.setModel((DefaultListModel)modeJugaB);
+        }
+    }//GEN-LAST:event_btnPartidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,13 +540,18 @@ public class Corto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Patidos;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarEquipo;
+    private javax.swing.JButton btnAsignar;
     private javax.swing.JButton btnJugadorAlto;
     private javax.swing.JButton btnMenorEdad;
+    private javax.swing.JButton btnPartido;
     private javax.swing.JButton btnPesaMas;
     private javax.swing.JComboBox<String> cmbEquipo1;
     private javax.swing.JComboBox<String> cmbEquipo2;
+    private javax.swing.JComboBox<String> cmbEquipos;
+    private javax.swing.JComboBox<String> cmbJugadores;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -271,14 +559,18 @@ public class Corto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> listEquipo1;
     private javax.swing.JList<String> listEquipo2;
     private javax.swing.JList<String> lstJugadores;
+    private javax.swing.JPanel pnlAgregarEquipos;
+    private javax.swing.JPanel pnlAsignarJugadores;
+    private javax.swing.JPanel pnlJugadores;
+    private javax.swing.JPanel pnlListaJugadores;
     private javax.swing.JTextField txtEdad;
     private javax.swing.JTextField txtEstatura;
     private javax.swing.JTextField txtNombre;

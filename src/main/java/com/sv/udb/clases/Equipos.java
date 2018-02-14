@@ -5,6 +5,7 @@
  */
 package com.sv.udb.clases;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,12 +16,17 @@ public class Equipos {
     private String name;
     private List<Jugadores> listJugadores;
 
-    public Equipos() {
-    }
-
-    public Equipos(String name, List<Jugadores> listJugadores) {
+    /**
+     * Constructor que recibe como parametro el nombre del equipo
+     * @param name 
+     */
+    public Equipos(String name) {
         this.name = name;
-        this.listJugadores = listJugadores;
+        this.listJugadores = new ArrayList<>();
+    }
+    
+    public Equipos() {
+        this.listJugadores = new ArrayList<>();
     }
 
     public String getName() {
@@ -39,4 +45,9 @@ public class Equipos {
         this.listJugadores = listJugadores;
     }
     
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }

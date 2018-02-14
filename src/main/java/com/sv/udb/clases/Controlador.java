@@ -34,11 +34,19 @@ public class Controlador {
         this.listJugadores.add(new Jugadores(nombre, edad, estatura, peso));
     }
     
+    /**
+     * Retorna toda la lista de los jugadores ingresados
+     * @return listaJugadores
+     */
     public List<Jugadores> listaJugadores()
     {
         return this.listJugadores;
     }
     
+    /**
+     * Retorna una lista de jugadores ordenada del jugador más alto al más bajo de estatura
+     * @return listaJugadores
+     */
     public List<Jugadores> jugadorMasAlto()
     {
         Collections.sort(listJugadores, (Jugadores o1, Jugadores o2) -> new Integer(o2.getEstatura()).compareTo(new Integer(o1.getEstatura())));
@@ -46,6 +54,10 @@ public class Controlador {
         return this.listJugadores;
     }
     
+    /**
+     * Retorna una lista de jugadores ordenada del jugador con menor edad al que tiene mayor edad
+     * @return listaJugadores
+     */
     public List<Jugadores> jugadorMenorEdad()
     {
         Collections.sort(listJugadores, (Jugadores o1, Jugadores o2) -> new Integer(o1.getEdad()).compareTo(new Integer(o2.getEdad())));
@@ -53,6 +65,10 @@ public class Controlador {
         return this.listJugadores;
     }
     
+    /**
+     * Retorna una lista de jugadores ordenada, del jugador con más peso al que tiene menor peso
+     * @return 
+     */
     public List<Jugadores> jugadorMasPeso()
     {
         Collections.sort(listJugadores, (Jugadores o1, Jugadores o2) -> new Double(o2.getPeso()).compareTo(new Double(o1.getPeso())));
